@@ -2,6 +2,8 @@ package com.epam.valevach.final_project.service.employee;
 
 import com.epam.valevach.final_project.dao.employee.EmployeeDAOImpl;
 import com.epam.valevach.final_project.entity.Employee;
+import com.epam.valevach.final_project.entity.Order;
+import com.epam.valevach.final_project.exceptions.EmployeeOrderAssignedException;
 import com.epam.valevach.final_project.service.department.DepartmentServiceImpl;
 import com.epam.valevach.final_project.service.order.OrderServiceImpl;
 import com.epam.valevach.final_project.validator.EmployeeDeleteValidation;
@@ -24,14 +26,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void create(Employee entity) {
-        UserInputValidation validation = UserInputValidation.getInstance();
+      /*  UserInputValidation validation = UserInputValidation.getInstance();
         if(!validation.checkNotNull(entity.getEmpName())||
                 !validation.checkNotNull(entity.getPosition())||
                 !validation.checkNotNull(entity.getSurName())||
                 !validation.checkNotNull(String.valueOf(entity.getDepId()))||
                 !validation.checkNotNull(String.valueOf(entity.getSalary()))){
             throw new RuntimeException();
-        }
+        }*/
         employeeDAO.create(entity);
     }
 
@@ -42,19 +44,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void delete(Employee entity) {
+        List<Order> orders = orderDAO.findOrdersByEmployeeId(entity.getId());
+        if (orders.size() > 0) {
+            throw new EmployeeOrderAssignedException();
+        }
         employeeDAO.delete(entity);
     }
 
     @Override
     public void update(Employee entity) {
-        UserInputValidation validation = UserInputValidation.getInstance();
+       /* UserInputValidation validation = UserInputValidation.getInstance();
         if(!validation.checkNotNull(entity.getEmpName())||
                 !validation.checkNotNull(entity.getPosition())||
                 !validation.checkNotNull(entity.getSurName())||
                 !validation.checkNotNull(String.valueOf(entity.getDepId()))||
                 !validation.checkNotNull(String.valueOf(entity.getSalary()))){
             throw new RuntimeException();
-        }
+        }*/
         employeeDAO.update(entity);
     }
 

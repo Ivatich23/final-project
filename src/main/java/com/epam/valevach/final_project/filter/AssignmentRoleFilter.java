@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,8 +25,7 @@ import java.util.Map;
 public class AssignmentRoleFilter implements Filter {
     private static final List<String> ADMIN_PATH = new ArrayList<>(
             Arrays.asList("/updateDep", "/updateEmp", "/updateOrder", "/updateOrderType", "/updateUsers"));
-    private static final List<String> USER_PATH = new ArrayList<>(
-            Arrays.asList("/updateDep", "/updateEmp", "/updateOrder"));
+    private static final List<String> USER_PATH = Collections.emptyList();
     private static final List<String> DIRECTOR_PATH = new ArrayList<>(
             Arrays.asList("/updateDep", "/updateEmp", "/updateOrder", "/updateOrderType"));
     private static final Map<String, List<String>> ALLOWED_PATH_FOR_CLIENT;

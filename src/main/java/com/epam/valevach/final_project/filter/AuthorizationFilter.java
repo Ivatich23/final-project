@@ -22,7 +22,7 @@ import java.util.Set;
 @WebFilter("/*")
 public class AuthorizationFilter implements Filter {
     private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(
-            Arrays.asList( "/login", "/singOut", "/reg","/startPage","/lang")));
+            Arrays.asList( "/login", "/singOut", "/reg","","/lang")));
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain filterChain) throws IOException, ServletException {

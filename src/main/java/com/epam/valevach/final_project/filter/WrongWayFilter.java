@@ -19,7 +19,7 @@ import java.util.Set;
 public class WrongWayFilter implements Filter {
     private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(
             Arrays.asList("/singOut", "/reg", "/lang", "/singOut", "/updateDep", "/updateEmp","/login",
-                    "/updateOrder", "/updateOrderType", "/homeMenu", "/startPage", "/updateUsers")));
+                    "/updateOrder", "/updateOrderType", "/homeMenu", "", "/updateUsers")));
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

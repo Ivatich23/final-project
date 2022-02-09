@@ -6,6 +6,7 @@ import com.epam.valevach.final_project.entity.Order;
 import java.util.List;
 
 public interface OrderDAO extends BaseDAO<Order> {
-    List<Order>showAllOrders();
+    List<Order> showAllOrders();
+
     Order orderToEmployee(Order entity);
 }
