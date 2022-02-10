@@ -38,11 +38,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void delete(Order entity) {
-        EmployeeDeleteValidation empDel = EmployeeDeleteValidation.getInstance();
-        //
-        if(!empDel.checkEqualsZero(String.valueOf(orderDAO.orderToEmployee(entity)))){
-            throw new RuntimeException();
-        }
         orderDAO.delete(entity);
     }
 

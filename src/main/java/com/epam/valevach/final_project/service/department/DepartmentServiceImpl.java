@@ -3,6 +3,7 @@ package com.epam.valevach.final_project.service.department;
 import com.epam.valevach.final_project.dao.department.DepartmentDAO;
 import com.epam.valevach.final_project.dao.department.DepartmentDAOImpl;
 import com.epam.valevach.final_project.entity.Department;
+import com.epam.valevach.final_project.exceptions.CreateDepartmentException;
 import com.epam.valevach.final_project.validator.UserInputValidation;
 
 import java.util.List;
@@ -28,7 +29,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         UserInputValidation validation = UserInputValidation.getInstance();
         if (!validation.instance.checkLengthLimit(entity.getDepName()) ||
                 !validation.instance.checkLengthLimit(entity.getDepPosition())) {
-            throw new RuntimeException();
+            throw new CreateDepartmentException();
         }
         departmentDAO.create(entity);
     }

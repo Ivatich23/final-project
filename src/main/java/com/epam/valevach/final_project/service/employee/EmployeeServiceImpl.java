@@ -1,13 +1,10 @@
 package com.epam.valevach.final_project.service.employee;
 
 import com.epam.valevach.final_project.dao.employee.EmployeeDAOImpl;
+import com.epam.valevach.final_project.dao.order.OrderDAOImpl;
 import com.epam.valevach.final_project.entity.Employee;
 import com.epam.valevach.final_project.entity.Order;
 import com.epam.valevach.final_project.exceptions.EmployeeOrderAssignedException;
-import com.epam.valevach.final_project.service.department.DepartmentServiceImpl;
-import com.epam.valevach.final_project.service.order.OrderServiceImpl;
-import com.epam.valevach.final_project.validator.EmployeeDeleteValidation;
-import com.epam.valevach.final_project.validator.UserInputValidation;
 
 import java.util.List;
 
@@ -44,7 +41,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void delete(Employee entity) {
-        List<Order> orders = orderDAO.findOrdersByEmployeeId(entity.getId());
+        OrderDAOImpl orderDAO = OrderDAOImpl.getInstance();
+        List<Order> orders = orderDAO.findOrdersByEmployeeId(entity);
         if (orders.size() > 0) {
             throw new EmployeeOrderAssignedException();
         }

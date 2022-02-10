@@ -1,6 +1,7 @@
 package com.epam.valevach.final_project.controller.employee;
 
 import com.epam.valevach.final_project.entity.Employee;
+import com.epam.valevach.final_project.exceptions.EmployeeOrderAssignedException;
 import com.epam.valevach.final_project.service.department.DepartmentServiceImpl;
 import com.epam.valevach.final_project.service.employee.EmployeeServiceImpl;
 
@@ -11,15 +12,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 @WebServlet("/updateEmp")
 public class UpdateEmployeeServletV1 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        EmployeeServiceImpl employeeService =  EmployeeServiceImpl.getInstance();
+        EmployeeServiceImpl employeeService = EmployeeServiceImpl.getInstance();
         Employee employee = new Employee();
-        if(req.getParameter("action")==null) {
+        if (req.getParameter("action") == null) {
             EmployeeServiceImpl empService = EmployeeServiceImpl.getInstance();
-            req.setAttribute("empService",empService);
+            req.setAttribute("empService", empService);
             RequestDispatcher dispatcher = req.getRequestDispatcher(
                     "/WEB-INF/view/employee/showAllEmp.jsp");
             dispatcher.forward(req, resp);
@@ -30,7 +32,17 @@ public class UpdateEmployeeServletV1 extends HttpServlet {
         } else if ("delete".equalsIgnoreCase(req.getParameter("action"))) {
             String empId = req.getParameter("id");
             employee.setId(Integer.parseInt(empId));
-            employeeService.delete(employee);
+            try {
+                employeeService.delete(employee);
+            } catch (EmployeeOrderAssignedException e) {
+                EmployeeServiceImpl empService = EmployeeServiceImpl.getInstance();
+                req.setAttribute("empService", empService);
+                String deleteEmployeeError = "delete orders";
+                req.setAttribute("deleteEmployeeError", deleteEmployeeError);
+                RequestDispatcher dispatcher = req.getRequestDispatcher(
+                        "/WEB-INF/view/employee/showAllEmp.jsp");
+                dispatcher.forward(req, resp);
+            }
         } else {
             Employee newEmp = employeeService.read(Integer.valueOf(req.getParameter("id")));
             req.setAttribute("newEmp", newEmp);
@@ -55,10 +67,10 @@ public class UpdateEmployeeServletV1 extends HttpServlet {
         employee.setPosition(position);
         employee.setSalary(salary);
         employee.setDepId(depId);
-        if("new".equalsIgnoreCase(req.getParameter("action"))){
+        if ("new".equalsIgnoreCase(req.getParameter("action"))) {
             try {
                 employeeService.create(employee);
-            }catch (RuntimeException e){
+            } catch (RuntimeException e) {
                 EmployeeServiceImpl empService = EmployeeServiceImpl.getInstance();
                 req.setAttribute("empService", empService);
                 String error = "invalid input,try again";
@@ -67,11 +79,11 @@ public class UpdateEmployeeServletV1 extends HttpServlet {
                         "/WEB-INF/view/employee/showAllEmp.jsp");
                 dispatcher.forward(req, resp);
             }
-        }else {
+        } else {
             employee.setId(Integer.parseInt(req.getParameter("id")));
             try {
                 employeeService.update(employee);
-            }catch (RuntimeException e){
+            } catch (RuntimeException e) {
                 EmployeeServiceImpl empService = EmployeeServiceImpl.getInstance();
                 req.setAttribute("empService", empService);
                 String error = "invalid input,try again";

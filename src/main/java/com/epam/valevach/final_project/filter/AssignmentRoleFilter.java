@@ -25,7 +25,8 @@ import java.util.Map;
 public class AssignmentRoleFilter implements Filter {
     private static final List<String> ADMIN_PATH = new ArrayList<>(
             Arrays.asList("/updateDep", "/updateEmp", "/updateOrder", "/updateOrderType", "/updateUsers"));
-    private static final List<String> USER_PATH = Collections.emptyList();
+    private static final List<String> USER_PATH = new ArrayList<>(
+            Arrays.asList("/updateDep", "/updateOrderType"));
     private static final List<String> DIRECTOR_PATH = new ArrayList<>(
             Arrays.asList("/updateDep", "/updateEmp", "/updateOrder", "/updateOrderType"));
     private static final Map<String, List<String>> ALLOWED_PATH_FOR_CLIENT;

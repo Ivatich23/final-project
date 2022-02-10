@@ -1,6 +1,7 @@
 package com.epam.valevach.final_project.controller.department;
 
 import com.epam.valevach.final_project.entity.Department;
+import com.epam.valevach.final_project.exceptions.CreateDepartmentException;
 import com.epam.valevach.final_project.service.department.DepartmentServiceImpl;
 import com.epam.valevach.final_project.validator.UserInputValidation;
 
@@ -53,7 +54,7 @@ public class UpdateDepartmentServlet extends HttpServlet {
         if ("new".equalsIgnoreCase(req.getParameter("action"))) {
            try {
                departmentService.create(department);
-           }catch (RuntimeException e){
+           }catch (CreateDepartmentException e){
                DepartmentServiceImpl depService = DepartmentServiceImpl.getInstance();
                req.setAttribute("depService", depService);
                String error = "invalid input,try again";

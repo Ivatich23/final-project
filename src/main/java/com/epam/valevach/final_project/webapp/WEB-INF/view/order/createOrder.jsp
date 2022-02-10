@@ -37,8 +37,12 @@
         </dl>
         <dl>
             <dt>${orderTypeId}: </dt>
-            <dd><input type="number" name="orderTypeId"
-             required placeholder="orderTypeId"/></dd>
+                  <dd><select name ="orderTypeId">
+                                     <option value ="1">PRINT</option>
+                                     <option  value ="2">RESTORATION</option>
+                                     <option  value ="4">INSTALLATION</option>
+                                    </select></dd>
+                           </dl>
         </dl>
          <dl>
          <dt>${productionTime}: </dt>

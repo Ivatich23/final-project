@@ -21,16 +21,23 @@
 <fmt:message bundle="${res}" key="update" var="update"/>
 <fmt:message bundle="${res}" key="delete" var="delete"/>
 <fmt:message bundle="${res}" key="invalidInput" var="invalidInput"/>
+<fmt:message bundle="${res}" key="deleteEmployeeError" var="deleteEmployeeError"/>
 <html>
 <body>
 <link href="/static/css/tableStyle.css" rel="stylesheet" type="text/css">
 <h2> ${workersList} </h2>
+ <c:if test="${deleteEmployeeError.equals('delete orders')}">
+    <p>${deleteEmployeeError}</p>
+  </c:if>
  <c:if test="${error.equals('invalid input,try again')}">
     <p>${invalidInput}</p>
   </c:if>
-<c:url var = "createButton" value = "/updateEmp">
-<c:param name = "action" value = "new"/>
-</c:url>
+    <c:if test="${user.getUserRole().equals('admin')}">
+          <c:url var = "createButton" value = "/updateEmp">
+          <c:param name = "action" value = "new"/>
+           </c:url>
+     </c:if>
+
 <table class="table">
     <tr>
         <th>${workerId}</th>
@@ -76,8 +83,11 @@
              </c:if>
         </tr>
     </c:forEach>
-    <input type  = "button" value = "${newWorker}"
-         onClick = "window.location.href = '${createButton}'"/>
+    <c:if test="${user.getUserRole().equals('admin')}">
+                        <input type  = "button" value = "${newWorker}"
+                         onClick = "window.location.href = '${createButton}'"/>
+                </c:if>
+
 </table>
 </body>
 </html>

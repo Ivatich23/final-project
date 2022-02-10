@@ -39,7 +39,7 @@ public class UpdateOrderServlet extends HttpServlet {
                     "/WEB-INF/view/order/updateOrder.jsp");
             dispatcher.forward(req, resp);
         }
-        resp.sendRedirect("/homeMenu");
+        resp.sendRedirect("/updateOrder");
     }
 
     @Override
@@ -73,6 +73,6 @@ public class UpdateOrderServlet extends HttpServlet {
             order.setOrderId(orderId);
             orderService.update(order);
         }
-
+        resp.sendRedirect("/updateOrder");
     }
 }
