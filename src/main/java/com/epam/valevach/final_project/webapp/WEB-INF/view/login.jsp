@@ -17,19 +17,24 @@
 <fmt:message bundle="${res}" key="enterPassword" var="enterPassword"/>
 <fmt:message bundle="${res}" key="save" var="save"/>
 <fmt:message bundle="${res}" key="logOff" var="logOff"/>
+<fmt:message bundle="${res}" key="loginError" var="loginError"/>
 <h2>${singUp}</h2>
 <br><br>
  <form method="post" action="/login">
 
         <dl>
-       <p> <c:out value="${errorLogin}"/><p>
+         <c:if test="${errorLogin.equals('This login is incorrect,try again')}">
+                            <p> <c:out value="${loginError}"/><p>
+                 </c:if>
         <dt>${enterLogin}: </dt>
-            <dd><input type="text" name="login"   /></dd>
+            <dd><input type="text" name="login"  min="1" max="999999"
+              required placeholder=""/></dd>
         </dl>
 
          <dl>
              <dt>${enterPassword}: </dt>
-             <dd><input type="number" name="password" /></dd>
+             <dd><input type="number" name="password"  min="1" max="99999999"
+               required placeholder=""/></dd>
                 </dl>
         <button type="submit">${save}</button>
         <br><br>

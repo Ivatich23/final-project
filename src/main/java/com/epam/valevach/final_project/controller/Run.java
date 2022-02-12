@@ -1,14 +1,15 @@
 package com.epam.valevach.final_project.controller;
 
-import com.epam.valevach.final_project.dao.order.OrderDAOImpl;
-import com.epam.valevach.final_project.entity.Employee;
+import com.epam.valevach.final_project.dao.department.DepartmentDAOImpl;
+import com.epam.valevach.final_project.entity.Department;
+
+import java.io.File;
 
 public class Run {
     public static void main(String[] args) {
-        Employee employee = new Employee(5,"disayner","Kirill",
-                "Valevach",10,4);
-        OrderDAOImpl orderDAO = OrderDAOImpl.getInstance();
-        System.out.println(orderDAO.findOrdersByEmployeeId(employee));
+        Department department = new Department("asd","asd",5);
+        DepartmentDAOImpl departmentDAO = DepartmentDAOImpl.getInstance();
+        departmentDAO.delete(department);
 
 
     }

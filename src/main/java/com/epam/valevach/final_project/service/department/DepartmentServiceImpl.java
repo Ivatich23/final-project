@@ -4,6 +4,8 @@ import com.epam.valevach.final_project.dao.department.DepartmentDAO;
 import com.epam.valevach.final_project.dao.department.DepartmentDAOImpl;
 import com.epam.valevach.final_project.entity.Department;
 import com.epam.valevach.final_project.exceptions.CreateDepartmentException;
+import com.epam.valevach.final_project.exceptions.DeleteDepartmentException;
+import com.epam.valevach.final_project.service.employee.EmployeeServiceImpl;
 import com.epam.valevach.final_project.validator.UserInputValidation;
 
 import java.util.List;
@@ -41,6 +43,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public void delete(Department entity) {
+        EmployeeServiceImpl employeeService = EmployeeServiceImpl.getInstance();
+        if(employeeService.readEmployeesByDepartment(entity.getDepId()).size()>0){
+            throw new DeleteDepartmentException();
+        }
         departmentDAO.delete(entity);
     }
 

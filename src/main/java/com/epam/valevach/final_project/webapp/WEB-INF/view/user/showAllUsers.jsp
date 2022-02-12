@@ -19,9 +19,14 @@
 <fmt:message bundle="${res}" key="logOff" var="logOff"/>
 <fmt:message bundle="${res}" key="enterDetails" var="enterDetails"/>
 <fmt:message bundle="${res}" key="save" var="save"/>
+<fmt:message bundle="${res}" key="IncorrectUserRole" var="IncorrectUserRole"/>
 
 <html>
 <body>
+    <c:if test="${message.equals('Incorrect input userRole')}">
+        <p> <c:out value="${IncorrectUserRole}"/><p>
+    </c:if>
+
 <link href="/static/css/tableStyle.css" rel="stylesheet" type="text/css">
 <h2> ${usersList} </h2>
 

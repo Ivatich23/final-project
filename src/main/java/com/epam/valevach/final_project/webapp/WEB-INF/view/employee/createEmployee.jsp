@@ -29,28 +29,28 @@
  <dd><input type="hidden" name="action" value="new"  /></dd>
         <dl>
             <dt>${departmentId}: </dt>
-            <dd><input type="number" name="depId" min="1" max="15"
-              required placeholder="depId"  /></dd>
+            <dd><input type="number" name="depId" min="1" max="99"
+              required placeholder=""  /></dd>
         </dl>
         <dl>
             <dt>${workerName}: </dt>
             <dd><input type="text" name="empName" maxlength="15"
-             required placeholder="empName"/></dd>
+             required placeholder=""/></dd>
         </dl>
         <dl>
             <dt>${workerSurName}: </dt>
             <dd><input type="text" name="surName" maxlength="15"
-              required placeholder="surName"/></dd>
+              required placeholder=""/></dd>
         </dl>
          <dl>
          <dt>${position}: </dt>
            <dd><input type="text" name="position" maxlength="15"
-            required placeholder="position"/></dd>
+            required placeholder=""/></dd>
          </dl>
            <dl>
          <dt>${salary}: </dt>
-           <dd><input type="number" name="salary" min="1" max="15"
-           required placeholder="salary"/></dd>
+           <dd><input type="number" name="salary" min="1" max="9999999"
+           required placeholder=""/></dd>
           </dl>
         <button type="submit">${save}</button>
     </form>

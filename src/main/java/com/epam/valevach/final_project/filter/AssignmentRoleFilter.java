@@ -1,6 +1,9 @@
 package com.epam.valevach.final_project.filter;
 
+import com.epam.valevach.final_project.controller.user.UpdateUserServlet;
 import com.epam.valevach.final_project.entity.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -21,8 +24,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebFilter(urlPatterns = { "/updateOrderType", "/updateUsers" })
+@WebFilter(urlPatterns = {"/updateOrderType", "/updateUsers"})
 public class AssignmentRoleFilter implements Filter {
+    final Logger logger = LogManager.getLogger(UpdateUserServlet.class);
     private static final List<String> ADMIN_PATH = new ArrayList<>(
             Arrays.asList("/updateDep", "/updateEmp", "/updateOrder", "/updateOrderType", "/updateUsers"));
     private static final List<String> USER_PATH = new ArrayList<>(
@@ -51,17 +55,24 @@ public class AssignmentRoleFilter implements Filter {
         HttpSession session = request.getSession();
         String path = request.getRequestURI().substring(request.getContextPath().length()).replaceAll("[/]+$", "");
         User user = (User) session.getAttribute("user");
-        List<String> containPath = ALLOWED_PATH_FOR_CLIENT.get(user.getUserRole());
-        boolean allowedPath = containPath.contains(path);
-        if (allowedPath ) {
-            filterChain.doFilter(req, res);
+        List<String> containPath = new ArrayList<>();
+        if (user != null) {
+            containPath = ALLOWED_PATH_FOR_CLIENT.get(user.getUserRole());
 
-        } else {
-            String message = "отказано в доступе";
-            req.setAttribute("message", message);
-            RequestDispatcher dispatcher = req.getRequestDispatcher(
-                    "/WEB-INF/view/homeMenuAndStartPage/startPage.jsp");
-            dispatcher.forward(req, res);
+            boolean allowedPath = containPath.contains(path);
+            if (allowedPath) {
+                filterChain.doFilter(req, res);
+
+            } else {
+                logger.error("User with "+user.getLogin()+ " is access denied");
+                String message = "отказано в доступе";
+                req.setAttribute("message", message);
+                RequestDispatcher dispatcher = req.getRequestDispatcher(
+                        "/WEB-INF/view/homeMenuAndStartPage/startPage.jsp");
+                dispatcher.forward(req, res);
+            }
+        }else {
+            response.sendRedirect("/homeMenu");
         }
     }
 

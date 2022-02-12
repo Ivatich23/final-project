@@ -32,8 +32,8 @@
                 <p> <c:out value="${message}"/><p>
                <dl>
                    <dt>${workerId}: </dt>
-                   <dd><input type="number" name="employeeId" value="${newOrder.getEmployeeId()}"
-                    required placeholder="${newOrder.getEmployeeId()}"/></dd>
+                   <dd><input type="number" name="employeeId" value="${newOrder.getEmployeeId()}" min="1" max="99"
+                    required placeholder=""/></dd>
                </dl>
                <dl>
                    <dt>${orderNumber}: </dt>
@@ -46,12 +46,12 @@
                 <dl>
                 <dt>${productionTime}: </dt>
                   <dd><input type="number" name="productionType" value="${newOrder.getProductionType()}"
-                   required placeholder="${newOrder.getProductionType()}"/></dd>
+                   required placeholder=""/></dd>
                 </dl>
                   <dl>
                 <dt>${price}: </dt>
                   <dd><input type="number" name="price" value="${newOrder.getPrice()}"
-                   required placeholder="${newOrder.getPrice()}"/></dd>
+                   required placeholder=""/></dd>
                  </dl>
 
         <button type="submit">${save}</button>

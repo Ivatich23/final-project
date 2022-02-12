@@ -29,7 +29,7 @@
         <dl>
             <dt>${typeOfOrder}: </dt>
             <dd><input type="text" name="typeOfOrder" maxlength="15"
-              required placeholder="typeOfOrder" /></dd>
+              required placeholder="" /></dd>
         </dl>
 
         <button type="submit">${save}</button>

@@ -23,18 +23,15 @@ public final class ConnectionManager {
     }
 
     private static Connection getConnection() {
-
         try {
             Class.forName("com.mysql.jdbc.Driver");
             return DriverManager.getConnection(PropertiesUtil.get(URL),
                     PropertiesUtil.get(USER),
                     PropertiesUtil.get(PASSWORD));
-        } catch (SQLException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
-        return null;
+
     }
 
     private static void connectionPoolSize() {
@@ -43,7 +40,7 @@ public final class ConnectionManager {
         pool = new ArrayBlockingQueue<>(size);
         for (int i = 0; i < size; i++) {
             Connection connection = getConnection();
-            Connection proxyInstance =(Connection) Proxy.newProxyInstance(ConnectionManager
+            Connection proxyInstance = (Connection) Proxy.newProxyInstance(ConnectionManager
                             .class.getClassLoader(), new Class[]{Connection.class},
                     (proxy, method, args) -> method.getName().equals("close")
                             ? pool.add((Connection) proxy) : method.invoke(connection, args));
@@ -51,7 +48,8 @@ public final class ConnectionManager {
 
         }
     }
-    public static Connection get(){
+
+    public static Connection get() {
         try {
             return pool.take();
         } catch (InterruptedException e) {

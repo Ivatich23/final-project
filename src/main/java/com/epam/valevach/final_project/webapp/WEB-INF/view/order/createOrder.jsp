@@ -32,8 +32,8 @@
  <dd><input type="hidden" name="action" value="new"  /></dd>
         <dl>
             <dt>${workerId}: </dt>
-            <dd><input type="number" name="employeeId"
-             required placeholder="employeeId"/></dd>
+            <dd><input type="number" name="employeeId" min="1" max="9999"
+             required placeholder=""/></dd>
         </dl>
         <dl>
             <dt>${orderTypeId}: </dt>
@@ -47,12 +47,12 @@
          <dl>
          <dt>${productionTime}: </dt>
            <dd><input type="number" name="productionType"
-             required placeholder="productionType"/></dd>
+             required placeholder=""/></dd>
          </dl>
            <dl>
          <dt>${price}: </dt>
            <dd><input type="number" name="price"
-             required placeholder="price"/></dd>
+             required placeholder=""/></dd>
           </dl>
         <button type="submit">${save}</button>
     </form>

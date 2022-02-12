@@ -17,14 +17,22 @@
 <fmt:message bundle="${res}" key="update" var="update"/>
 <fmt:message bundle="${res}" key="delete" var="delete"/>
 <fmt:message bundle="${res}" key="newDepartment" var="newDepartment"/>
+<fmt:message bundle="${res}" key="invalidInput" var="invalidInput"/>
 <html>
 <body>
-<p> <c:out value="${error}"/><p>
+ <c:if test="${error.equals('invalid input,try again')}">
+      <p> <c:out value="${invalidInput}"/><p>
+
+  </c:if>
+
 <link href="/static/css/tableStyle.css" rel="stylesheet" type="text/css">
 <h2> ${departmentList} </h2>
- <c:url var = "createButton" value = "/updateDep">
- <c:param name = "action" value = "newDep"/>
-</c:url>
+ <c:if test="${user.getUserRole().equals('admin')}">
+      <c:url var = "createButton" value = "/updateDep">
+      <c:param name = "action" value = "newDep"/>
+      </c:url>
+  </c:if>
+
 <table class="table">
     <tr>
         <th>${departmentId}</th>
@@ -64,8 +72,11 @@
              </c:if>
         </tr>
     </c:forEach>
-     <input type  = "button" value = "${newDepartment}"
-     onClick = "window.location.href = '${createButton}'"/>
+    <c:if test="${user.getUserRole().equals('admin')}">
+       <input type  = "button" value = "${newDepartment}"
+       onClick = "window.location.href = '${createButton}'"/>
+      </c:if>
+
 </table>
 </body>
 </html>

@@ -1,7 +1,8 @@
 package com.epam.valevach.final_project.dao.department;
 
-import com.epam.valevach.final_project.dao.ConnectionToMySQL;
 import com.epam.valevach.final_project.entity.Department;
+import com.epam.valevach.final_project.entity.Employee;
+import com.epam.valevach.final_project.entity.Order;
 import com.epam.valevach.final_project.util.ConnectionManager;
 
 import java.sql.Connection;
@@ -24,13 +25,16 @@ public class DepartmentDAOImpl implements DepartmentDAO {
             "department SET dep_name = ?,dep_position =? WHERE dep_id = ?";
     private static final String SHOW_ALL_DEPARTMENTS = "SELECT dep_id,dep_name,dep_position FROM " +
             "department ";
+
     private DepartmentDAOImpl(){}
 
     public static  DepartmentDAOImpl getInstance(){
-        if(instance ==null){
-            instance = new DepartmentDAOImpl();
+        synchronized (DepartmentDAOImpl.class) {
+            if (instance == null) {
+                instance = new DepartmentDAOImpl();
+            }
+            return instance;
         }
-        return instance;
     }
     @Override
     public void create(Department entity) {
@@ -109,4 +113,6 @@ public class DepartmentDAOImpl implements DepartmentDAO {
         }
         return allDepartments;
     }
+
+
 }

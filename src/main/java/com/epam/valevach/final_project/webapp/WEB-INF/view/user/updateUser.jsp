@@ -28,10 +28,9 @@
 
              <dd><input type="hidden" name="id" value="${newUser.getId()}"  /></dd>
         <dl>
-             <p> <c:out value="${message}"/><p>
             <dt>${role}: </dt>
-            <dd><input type="number" name="role" value="${newUser.getRole()}"
-              required placeholder="${newUser.getRole()}"/></dd>
+            <dd><input type="number" name="role" value="${newUser.getRole()}"  min="1" max="9999"
+              required placeholder=""/></dd>
         </dl>
 
 

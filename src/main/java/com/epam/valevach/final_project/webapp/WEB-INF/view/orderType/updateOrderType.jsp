@@ -29,7 +29,7 @@
  <form method="post" action="/updateOrderType">
 
              <dd><input type="hidden" name="id" value="${newOrderType.getOrderTypeId()}" maxlength="15"
-             required placeholder="${newOrderType.getOrderTypeId()}" /></dd>
+             required placeholder="" /></dd>
 
        <dl>
 

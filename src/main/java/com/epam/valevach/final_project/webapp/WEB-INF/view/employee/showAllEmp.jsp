@@ -26,7 +26,7 @@
 <body>
 <link href="/static/css/tableStyle.css" rel="stylesheet" type="text/css">
 <h2> ${workersList} </h2>
- <c:if test="${deleteEmployeeError.equals('delete orders')}">
+ <c:if test="${deleteEmployeeError1.equals('delete orders')}">
     <p>${deleteEmployeeError}</p>
   </c:if>
  <c:if test="${error.equals('invalid input,try again')}">

@@ -28,10 +28,12 @@ public class OrderTypeDAOImpl implements OrderTypeDAO{
             "order_type ";
     private OrderTypeDAOImpl(){}
     public static OrderTypeDAOImpl getInstance(){
-        if (instance == null) {
-            instance = new OrderTypeDAOImpl();
+        synchronized (OrderDAOImpl.class) {
+            if (instance == null) {
+                instance = new OrderTypeDAOImpl();
+            }
+            return instance;
         }
-        return instance;
     }
     @Override
     public void create(OrderType entity) {

@@ -1,10 +1,13 @@
 package com.epam.valevach.final_project.service.employee;
 
+import com.epam.valevach.final_project.dao.department.DepartmentDAOImpl;
 import com.epam.valevach.final_project.dao.employee.EmployeeDAOImpl;
 import com.epam.valevach.final_project.dao.order.OrderDAOImpl;
 import com.epam.valevach.final_project.entity.Employee;
 import com.epam.valevach.final_project.entity.Order;
+import com.epam.valevach.final_project.exceptions.ChangeEmployeeDepartmentException;
 import com.epam.valevach.final_project.exceptions.EmployeeOrderAssignedException;
+import com.epam.valevach.final_project.exceptions.NewEmployeeException;
 
 import java.util.List;
 
@@ -23,14 +26,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void create(Employee entity) {
-      /*  UserInputValidation validation = UserInputValidation.getInstance();
-        if(!validation.checkNotNull(entity.getEmpName())||
-                !validation.checkNotNull(entity.getPosition())||
-                !validation.checkNotNull(entity.getSurName())||
-                !validation.checkNotNull(String.valueOf(entity.getDepId()))||
-                !validation.checkNotNull(String.valueOf(entity.getSalary()))){
-            throw new RuntimeException();
-        }*/
+        DepartmentDAOImpl departmentDAO = DepartmentDAOImpl.getInstance();
+        if(departmentDAO.read(entity.getDepId()).getDepId()==0){
+            throw new NewEmployeeException();
+        }
         employeeDAO.create(entity);
     }
 
@@ -51,14 +50,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void update(Employee entity) {
-       /* UserInputValidation validation = UserInputValidation.getInstance();
-        if(!validation.checkNotNull(entity.getEmpName())||
-                !validation.checkNotNull(entity.getPosition())||
-                !validation.checkNotNull(entity.getSurName())||
-                !validation.checkNotNull(String.valueOf(entity.getDepId()))||
-                !validation.checkNotNull(String.valueOf(entity.getSalary()))){
-            throw new RuntimeException();
-        }*/
+        DepartmentDAOImpl departmentDAO = DepartmentDAOImpl.getInstance();
+       if(departmentDAO.read(entity.getDepId()).getDepId()==0){
+           throw new ChangeEmployeeDepartmentException();
+       }
         employeeDAO.update(entity);
     }
 

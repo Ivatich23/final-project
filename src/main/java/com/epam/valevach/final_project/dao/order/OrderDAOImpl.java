@@ -31,10 +31,12 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     public static OrderDAOImpl getInstance() {
-        if (instance == null) {
-            instance = new OrderDAOImpl();
+        synchronized (OrderDAOImpl.class) {
+            if (instance == null) {
+                instance = new OrderDAOImpl();
+            }
+            return instance;
         }
-        return instance;
     }
 
     @Override

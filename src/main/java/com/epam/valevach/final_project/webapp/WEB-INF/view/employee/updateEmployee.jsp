@@ -32,28 +32,28 @@
 
        <dl>
                    <dt>${departmentId}: </dt>
-                   <dd><input type="number" name="depId" value="${newEmp.getDepId()}"
-                     required placeholder="${newEmp.getDepId()}"/></dd>
+                   <dd><input type="number" name="depId" value="${newEmp.getDepId()}" min="1" max="99"
+                     required placeholder=""/></dd>
                </dl>
                <dl>
                    <dt>${workerName}: </dt>
                    <dd><input type="text" name="empName" value="${newEmp.getEmpName()}" maxlength="15"
-                     required placeholder="${newEmp.getEmpName()}"/></dd>
+                     required placeholder=""/></dd>
                </dl>
                <dl>
                    <dt>${workerSurName}: </dt>
                    <dd><input type="text" name="surName" value="${newEmp.getSurName()}" maxlength="15"
-                    required placeholder="${newEmp.getSurName()}"/></dd>
+                    required placeholder=""/></dd>
                </dl>
                 <dl>
                 <dt>${ position}: </dt>
                   <dd><input type="text" name="position" value="${newEmp.getPosition()}" maxlength="15"
-                     required placeholder="${newEmp.getPosition()}"/></dd>
+                     required placeholder=""/></dd>
                 </dl>
                   <dl>
                 <dt>${salary}: </dt>
-                  <dd><input type="number" name="salary" value="${newEmp.getSalary()}"
-                     required placeholder="${newEmp.getSalary()}"/></dd>
+                  <dd><input type="number" name="salary" value="${newEmp.getSalary()}" min="1" max="9999999"
+                     required placeholder=""/></dd>
                  </dl>
 
         <button type="submit">${save}</button>

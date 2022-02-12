@@ -36,12 +36,16 @@ public class UserDAOImpl implements UserDAO {
     private static final String SHOW_ALL_USERS_INFO = "SELECT id, login,password,role FROM " +
             "user ";
 
-private UserDAOImpl(){}
-    public static UserDAOImpl getInstance(){
-        if (instance == null) {
-            instance = new UserDAOImpl();
+    private UserDAOImpl() {
+    }
+
+    public static UserDAOImpl getInstance() {
+        synchronized (UserDAOImpl.class) {
+            if (instance == null) {
+                instance = new UserDAOImpl();
+            }
+            return instance;
         }
-        return instance;
     }
 
     @Override
@@ -126,15 +130,15 @@ private UserDAOImpl(){}
     }
 
     @Override
-    public Map<String,String> userInfo() {
-        Map<String,String> allUsersInfo = new HashMap<>();
+    public Map<String, String> userInfo() {
+        Map<String, String> allUsersInfo = new HashMap<>();
         try (Connection dbConnection = ConnectionManager.get();
              PreparedStatement preparedStatement = dbConnection.prepareStatement(SHOW_ALL_USERS_INFO)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-             allUsersInfo.
-                     put(resultSet.
-                             getString("login"),resultSet.getString("password"));
+                allUsersInfo.
+                        put(resultSet.
+                                getString("login"), resultSet.getString("password"));
             }
 
         } catch (SQLException throwables) {
@@ -151,7 +155,7 @@ private UserDAOImpl(){}
              PreparedStatement preparedStatement = dbConnection.prepareStatement(SHOW_ALL_USERS)) {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                String userLogin =resultSet.getString("login");
+                String userLogin = resultSet.getString("login");
                 allUsersLogin.add(userLogin);
             }
 
@@ -170,8 +174,8 @@ private UserDAOImpl(){}
             while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getInt("id"));
-                user.setLogin( resultSet.getString("login"));
-                user.setUserRole( resultSet.getString("r.role"));
+                user.setLogin(resultSet.getString("login"));
+                user.setUserRole(resultSet.getString("r.role"));
                 allUsersLogin.add(user);
             }
 

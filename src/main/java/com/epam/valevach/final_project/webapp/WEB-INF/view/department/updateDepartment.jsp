@@ -28,12 +28,12 @@
         <dl>
             <dt>${departmentName}: </dt>
             <dd><input type="text" name="depName" value="${newDep.getDepName()}" maxlength="15"
-              required placeholder="${newDep.getDepName()}"/></dd>
+              required placeholder=""/></dd>
         </dl>
         <dl>
             <dt>${position}: </dt>
             <dd><input type="text" name="depPosition" value="${newDep.getDepPosition()}" maxlength="15"
-              required placeholder="${newDep.getDepPosition()}"/></dd>
+              required placeholder=""/></dd>
         </dl>
 
         <button type="submit">${save}</button>

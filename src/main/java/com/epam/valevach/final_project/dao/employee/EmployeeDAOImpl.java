@@ -34,13 +34,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     private EmployeeDAOImpl() {
     }
 
-    ;
 
     public static EmployeeDAOImpl getInstance() {
-        if (instance == null) {
-            instance = new EmployeeDAOImpl();
+        synchronized (EmployeeDAOImpl.class) {
+            if (instance == null) {
+                instance = new EmployeeDAOImpl();
+            }
+            return instance;
         }
-        return instance;
     }
 
     @Override

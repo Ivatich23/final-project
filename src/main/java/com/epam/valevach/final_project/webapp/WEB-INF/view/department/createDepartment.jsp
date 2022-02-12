@@ -24,12 +24,12 @@
         <dl>
             <dt>${departmentName}: </dt>
             <dd><input type="text" name="depName" maxlength="15"
-              required placeholder="depName"/></dd>
+              required placeholder=""/></dd>
         </dl>
         <dl>
             <dt>${position}: </dt>
             <dd><input type="text" name="depPosition" maxlength="15"
-              required placeholder="depPosition"/></dd>
+              required placeholder=""/></dd>
         </dl>
 
         <button type="submit">${save}</button>

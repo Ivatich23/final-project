@@ -24,10 +24,12 @@ public class RoleDAOImpl implements RoleDAO {
             "role WHERE role = ?";
     private RoleDAOImpl(){}
     public static RoleDAOImpl getInstance(){
-        if (instance == null) {
-            instance = new RoleDAOImpl();
+        synchronized (RoleDAOImpl.class) {
+            if (instance == null) {
+                instance = new RoleDAOImpl();
+            }
+            return instance;
         }
-        return instance;
     }
 
     @Override
