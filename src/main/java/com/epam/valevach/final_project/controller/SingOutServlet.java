@@ -19,7 +19,7 @@ public class SingOutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        logger.info("выход пользователя "+session.getAttribute("user"));
+        logger.info("Sing out user "+session.getAttribute("user"));
         resp.sendRedirect("/startPage");
         session.invalidate();
     }
