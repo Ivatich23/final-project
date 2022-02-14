@@ -31,7 +31,7 @@ CREATE TABLE employees (
 CREATE TABLE user (
   id int NOT NULL auto_increment,
   login varchar(25),
-  password varchar(25),
+  password varchar(200),
   role int,
   PRIMARY KEY (id),
   FOREIGN KEY (role)  REFERENCES role (id)

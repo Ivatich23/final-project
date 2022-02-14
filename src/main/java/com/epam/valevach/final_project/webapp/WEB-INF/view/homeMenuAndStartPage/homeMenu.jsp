@@ -1,11 +1,13 @@
 
 <!DOCTYPE html>
 <html>
+<%@ taglib prefix="CT" uri="/WEB-INF/customTags.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/fmt" prefix = "fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <body>
+<CT:showTime/>
 <c:if test="${language.equals('ru')}">
     <p><fmt:setLocale value="ru"/></p>
 </c:if>
